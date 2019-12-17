@@ -8,7 +8,7 @@
           <div id="nav" class="col-3 bg-warning">nav</div>
           <div id="sections" class="col-9 bg-success">
             <sectionCarousel></sectionCarousel>
-            <sectionTest1></sectionTest1>
+            <sectionAnimationTest1></sectionAnimationTest1>
           </div>
         </div>
     </div>
@@ -18,7 +18,7 @@
 <script>
 import sectionHeader from './components/sectionHeader'
 import sectionCarousel from './components/sectionCarousel'
-import sectionTest1 from './components/sectionTest1'
+import sectionAnimationTest1 from './components/sectionAnimationTest1'
 
 export default {
   name: "app",
@@ -28,7 +28,7 @@ export default {
   components: {
     sectionHeader,
     sectionCarousel,
-    sectionTest1
+    sectionAnimationTest1
   }
 };
 </script>
