@@ -8,6 +8,7 @@
           <div id="nav" class="col-3 bg-warning">nav</div>
           <div id="sections" class="col-9 bg-success">
             <sectionCarousel></sectionCarousel>
+            <sectionAnimationList></sectionAnimationList>
             <sectionAnimationTest1></sectionAnimationTest1>
           </div>
         </div>
@@ -18,6 +19,7 @@
 <script>
 import sectionHeader from './components/sectionHeader'
 import sectionCarousel from './components/sectionCarousel'
+import sectionAnimationList from './components/sectionAnimationList'
 import sectionAnimationTest1 from './components/sectionAnimationTest1'
 
 export default {
@@ -28,6 +30,7 @@ export default {
   components: {
     sectionHeader,
     sectionCarousel,
+    sectionAnimationList,
     sectionAnimationTest1
   }
 };
