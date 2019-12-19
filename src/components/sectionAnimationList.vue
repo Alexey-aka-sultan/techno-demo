@@ -1,5 +1,6 @@
 <template>
   <section id="animationList-section" class="pt-5 pb-5 bg-white">
+    <!--  -->
     <h4 class="text-center pb-4">
       Покупка случайного товара по случайным ценам
     </h4>
@@ -16,7 +17,7 @@
         <div
           v-for="item in arrayOne"
           :key="item.id"
-          class="card p-1 bg-success m-1"
+          class="card p-1 bg-success shadow-sm m-1"
         >
           <div class="card-body p-1 text-center">
             <i :class="item.imgSrc"></i>
@@ -32,7 +33,7 @@
         </button>
       </div>
       <!--  -->
-      <div class="shopping-list col-5 d-flex flex-column">
+      <div class="shopping-list col-5">
         <transition-group
           tag="ul"
           class="list-group"
@@ -49,13 +50,20 @@
         </transition-group>
       </div>
     </div>
-    <div class="d-flex justify-content-between align-items-center pt-3">
-      <div v-show="error" class="alert alert-warning show m-0 ml-2">
-        {{ error }}
-        <button class="close pl-3" @click="clearError()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+    <div
+      class="d-flex justify-content-between align-items-center position-relative pt-3"
+    >
+      <transition enter-class="opacity-0" enter-active-class="transition-500ms">
+        <div
+          v-show="error"
+          class="alert alert-warning show position-absolute m-0 ml-2"
+        >
+          {{ error }}
+          <button class="close ml-3" @click="clearError()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </transition>
 
       <p class="pr-4 m-0 ml-auto mr-0">
         Осталось наличных: <strong>{{ cash }}$</strong>
@@ -78,18 +86,8 @@ export default {
   },
   methods: {
     fillArrayOne() {
-      const itemNames = [
-        "volleyball-ball",
-        "baseball-ball",
-        "drum",
-        "futbol",
-        "bowling-ball",
-        "bicycle",
-        "pepper-hot",
-        "carrot",
-        "lemon",
-        "bomb"
-      ];
+      const itemNames = this.$store.getters.getItemNames;
+
       for (let i = 0; i < itemNames.length; i++) {
         this.arrayOne.push({
           id: i,
@@ -101,7 +99,6 @@ export default {
     },
     buyItem() {
       const ind = Math.floor(Math.random() * this.arrayOne.length);
-      
       if (!this.buyIsValid(this.arrayOne[ind])) return;
 
       const item = this.arrayOne.splice(ind, 1);
@@ -109,10 +106,8 @@ export default {
       this.shoppingQueue.push(item[0]);
     },
     returnItem() {
-      if (this.arrayTwo.length === 0) {
-        this.error = "У вас больше нет товара";
-        return;
-      }
+      if (!this.returnIsValid()) return;
+
       const ind = Math.floor(Math.random() * this.arrayTwo.length);
       const item = this.arrayTwo.splice(ind, 1);
       this.cash += item[0].cost;
@@ -120,8 +115,10 @@ export default {
     },
     buyIsValid(item) {
       this.clearError();
+
       if (this.arrayOne.length === 0) this.error = "Вы купили весь товар";
       if (this.cash - item.cost < 0) this.error = "У вас не достаточно денег";
+
       if (this.error) {
         return false;
       } else {
@@ -129,7 +126,15 @@ export default {
       }
     },
     returnIsValid() {
-      //
+      this.clearError();
+
+      if (this.arrayTwo.length === 0) this.error = "У вас больше нет товара";
+
+      if (this.error) {
+        return false;
+      } else {
+        return true;
+      }
     },
     clearError() {
       this.error = "";
@@ -141,6 +146,13 @@ export default {
       this.arrayOne.push(this.returnQueue.shift());
     }
   },
+  watch: {
+    error(val) {
+      if (val.length > 0) {
+        setTimeout(() => (this.error = ""), 3000);
+      }
+    }
+  },
   created() {
     this.fillArrayOne();
   }
@@ -148,11 +160,24 @@ export default {
 </script>
 
 <style scoped>
+.transition-500ms {
+  transition: all 500ms;
+}
+.opacity-0 {
+  opacity: 0;
+}
+
+.items-list,
 .shopping-list {
-  min-height: 400px;
-  max-height: 400px;
+  height: 400px;
+}
+.shopping-list {
   overflow-y: scroll;
   overflow-x: hidden;
+}
+
+.items-list {
+  overflow: hidden;
 }
 
 .items-list > .card {

@@ -5,10 +5,25 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    someValue: 25
+    itemNames: [
+      "volleyball-ball",
+      "baseball-ball",
+      "drum",
+      "futbol",
+      "bowling-ball",
+      "bicycle",
+      "pepper-hot",
+      "carrot",
+      "lemon",
+      "bomb"
+    ]
   },
   mutations: {},
   actions: {},
-  getters: {},
+  getters: {
+    getItemNames(state) {
+      return state.itemNames;
+    }
+  },
   mosules: {}
 });
