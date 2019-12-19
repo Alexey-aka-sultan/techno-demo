@@ -1,32 +1,66 @@
 <template>
   <section id="animationList-section" class="pt-5 pb-5 bg-white">
-    <div class="row col-12">
+    <h4 class="text-center pb-4">
+      Покупка случайного товара по случайным ценам
+    </h4>
+    <div class="row col-12 m-0">
+      <!--  -->
       <transition-group
         tag="div"
-        class="d-flex align-items-center justify-content-start flex-wrap col-5"
+        class="items-list d-flex align-items-start justify-content-start flex-wrap col-5"
+        @after-leave="shopAfterLeave"
+        move-class="items-list-move"
+        leave-active-class="animated rubberBand"
+        enter-active-class="animated wobble"
       >
-        <div v-for="item in arrayOne" :key="item.id" class="p-4 bg-success m-1">
-          <h5>{{ item.cost }}$</h5>
+        <div
+          v-for="item in arrayOne"
+          :key="item.id"
+          class="card p-1 bg-success m-1"
+        >
+          <div class="card-body p-1 text-center">
+            <i :class="item.imgSrc"></i>
+            <h5 class="card-title mb-0 mt-1">{{ item.cost }}$</h5>
+          </div>
         </div>
       </transition-group>
+      <!--  -->
       <div class="col-2 d-flex flex-column justify-content-end">
-        <button class="btn btn-success m-1" @click="buyItem">Купить</button>
-        <button class="btn btn-warning m-1" @click="returnItem">Вернуть</button>
+        <button class="btn-sm btn-success m-1" @click="buyItem">Купить</button>
+        <button class="btn-sm btn-warning m-1" @click="returnItem">
+          Вернуть
+        </button>
       </div>
-      <div class="col-5 d-flex flex-column shopping-list">
-        <transition-group tag="ul" class="list-group">
+      <!--  -->
+      <div class="shopping-list col-5 d-flex flex-column">
+        <transition-group
+          tag="ul"
+          class="list-group"
+          @after-leave="basketAfterLeave"
+          leave-active-class="animated rubberBand d-inline-block"
+          enter-active-class="animated tada"
+        >
           <li v-for="item in arrayTwo" :key="item.id" class="list-group-item">
-            {{ item.title
-            }}<span class="badge badge-primary float-right"
-              >{{ item.cost }}$</span
-            >
+            {{ item.title }}
+            <span class="badge badge-primary float-right">
+              {{ item.cost }}$
+            </span>
           </li>
         </transition-group>
       </div>
     </div>
-    <p class="pr-4 pt-4 m-0 text-right">
-      Осталось наличных: <strong>{{ cash }}$</strong>
-    </p>
+    <div class="d-flex justify-content-between align-items-center pt-3">
+      <div v-show="error" class="alert alert-warning show m-0 ml-2">
+        {{ error }}
+        <button class="close pl-3" @click="clearError()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <p class="pr-4 m-0 ml-auto mr-0">
+        Осталось наличных: <strong>{{ cash }}$</strong>
+      </p>
+    </div>
   </section>
 </template>
 
@@ -36,32 +70,75 @@ export default {
     return {
       cash: 400,
       arrayOne: [],
-      arrayTwo: []
+      arrayTwo: [],
+      shoppingQueue: [],
+      returnQueue: [],
+      error: ""
     };
   },
   methods: {
     fillArrayOne() {
-      for (let i = 0; i < 10; i++) {
-        let cost = Math.round(Math.random() * 25);
+      const itemNames = [
+        "volleyball-ball",
+        "baseball-ball",
+        "drum",
+        "futbol",
+        "bowling-ball",
+        "bicycle",
+        "pepper-hot",
+        "carrot",
+        "lemon",
+        "bomb"
+      ];
+      for (let i = 0; i < itemNames.length; i++) {
         this.arrayOne.push({
           id: i,
-          title: `fruit-${i}`,
-          imgSrc: "",
-          cost: cost
+          title: itemNames[i],
+          imgSrc: `fas fa-${itemNames[i]}`,
+          cost: Math.round(Math.random() * 99) + 1
         });
       }
     },
     buyItem() {
-      if (this.arrayOne.length === 0) return;
       const ind = Math.floor(Math.random() * this.arrayOne.length);
+      
+      if (!this.buyIsValid(this.arrayOne[ind])) return;
+
       const item = this.arrayOne.splice(ind, 1);
-      this.arrayTwo.push(item[0]);
+      this.cash -= item[0].cost;
+      this.shoppingQueue.push(item[0]);
     },
     returnItem() {
-      if (this.arrayTwo.length === 0) return;
+      if (this.arrayTwo.length === 0) {
+        this.error = "У вас больше нет товара";
+        return;
+      }
       const ind = Math.floor(Math.random() * this.arrayTwo.length);
       const item = this.arrayTwo.splice(ind, 1);
-      this.arrayOne.push(item[0]);
+      this.cash += item[0].cost;
+      this.returnQueue.push(item[0]);
+    },
+    buyIsValid(item) {
+      this.clearError();
+      if (this.arrayOne.length === 0) this.error = "Вы купили весь товар";
+      if (this.cash - item.cost < 0) this.error = "У вас не достаточно денег";
+      if (this.error) {
+        return false;
+      } else {
+        return true;
+      }
+    },
+    returnIsValid() {
+      //
+    },
+    clearError() {
+      this.error = "";
+    },
+    shopAfterLeave(el) {
+      this.arrayTwo.push(this.shoppingQueue.shift());
+    },
+    basketAfterLeave(el) {
+      this.arrayOne.push(this.returnQueue.shift());
     }
   },
   created() {
@@ -71,12 +148,20 @@ export default {
 </script>
 
 <style scoped>
-/* #animationList-section .row{
-  min-height: 400px;
-} */
 .shopping-list {
-     min-height: 400px;
-    max-height: 400px;
-    overflow-y: scroll
+  min-height: 400px;
+  max-height: 400px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.items-list > .card {
+  min-width: 60px;
+}
+.items-list > .card i {
+  font-size: 2rem;
+}
+.items-list-move {
+  transition: all 1s;
 }
 </style>
