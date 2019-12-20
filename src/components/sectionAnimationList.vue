@@ -1,5 +1,5 @@
 <template>
-  <section id="animationList-section" class="pt-5 pb-5 bg-white">
+  <section id="animationList-section" class="pt-5 pb-3 bg-white">
     <!--  -->
     <h4 class="text-center pb-4">
       Покупка случайного товара по случайным ценам
@@ -14,11 +14,7 @@
         leave-active-class="animated rubberBand"
         enter-active-class="animated wobble"
       >
-        <div
-          v-for="item in arrayOne"
-          :key="item.id"
-          class="card p-1 bg-success shadow-sm m-1"
-        >
+        <div v-for="item in arrayOne" :key="item.id" class="card p-1 bg-success shadow-sm m-1">
           <div class="card-body p-1 text-center">
             <i :class="item.imgSrc"></i>
             <h5 class="card-title mb-0 mt-1">{{ item.cost }}$</h5>
@@ -28,9 +24,7 @@
       <!--  -->
       <div class="col-2 d-flex flex-column justify-content-end">
         <button class="btn-sm btn-success m-1" @click="buyItem">Купить</button>
-        <button class="btn-sm btn-warning m-1" @click="returnItem">
-          Вернуть
-        </button>
+        <button class="btn-sm btn-warning m-1" @click="returnItem">Вернуть</button>
       </div>
       <!--  -->
       <div class="shopping-list col-5">
@@ -43,21 +37,14 @@
         >
           <li v-for="item in arrayTwo" :key="item.id" class="list-group-item">
             {{ item.title }}
-            <span class="badge badge-primary float-right">
-              {{ item.cost }}$
-            </span>
+            <span class="badge badge-primary float-right"> {{ item.cost }}$ </span>
           </li>
         </transition-group>
       </div>
     </div>
-    <div
-      class="d-flex justify-content-between align-items-center position-relative pt-3"
-    >
+    <div class="d-flex justify-content-between align-items-center position-relative pt-3">
       <transition enter-class="opacity-0" enter-active-class="transition-500ms">
-        <div
-          v-show="error"
-          class="alert alert-warning show position-absolute m-0 ml-2"
-        >
+        <div v-show="error" class="alert alert-warning show position-absolute m-0 ml-2">
           {{ error }}
           <button class="close ml-3" @click="clearError()">
             <span aria-hidden="true">&times;</span>
@@ -116,14 +103,15 @@ export default {
     buyIsValid(item) {
       this.clearError();
 
-      if (this.arrayOne.length === 0) this.error = "Вы купили весь товар";
-      if (this.cash - item.cost < 0) this.error = "У вас не достаточно денег";
-
-      if (this.error) {
+      if (this.arrayOne.length === 0) {
+        this.error = "Вы купили весь товар";
         return false;
-      } else {
-        return true;
       }
+      if (this.cash - item.cost < 0) {
+        this.error = "У вас не достаточно денег";
+        return false;
+      }
+      return true;
     },
     returnIsValid() {
       this.clearError();
@@ -182,6 +170,8 @@ export default {
 
 .items-list > .card {
   min-width: 60px;
+  background: rgb(22, 194, 13);
+  background: linear-gradient(0deg, #519f2c, #16c20d);
 }
 .items-list > .card i {
   font-size: 2rem;

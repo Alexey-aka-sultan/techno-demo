@@ -8,8 +8,10 @@
           <div id="nav" class="col-3 bg-warning">nav</div>
           <div id="sections" class="col-9 bg-success">
             <sectionCarousel></sectionCarousel>
+            <hr>
             <sectionAnimationList></sectionAnimationList>
-            <sectionAnimationTest1></sectionAnimationTest1>
+            <hr>
+            <sectionPagination></sectionPagination>
           </div>
         </div>
     </div>
@@ -20,7 +22,7 @@
 import sectionHeader from './components/sectionHeader'
 import sectionCarousel from './components/sectionCarousel'
 import sectionAnimationList from './components/sectionAnimationList'
-import sectionAnimationTest1 from './components/sectionAnimationTest1'
+import sectionPagination from './components/sectionPagination'
 
 export default {
   name: "app",
@@ -31,7 +33,7 @@ export default {
     sectionHeader,
     sectionCarousel,
     sectionAnimationList,
-    sectionAnimationTest1
+    sectionPagination
   }
 };
 </script>

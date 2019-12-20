@@ -1,7 +1,7 @@
 <template>
   <section
     id="carousel-section"
-    class="d-flex justify-content-center pt-5 pb-5"
+    class="d-flex justify-content-center pt-5 pb-5 bg-white"
   >
     <carouselComponent
       id="carouselOne"
