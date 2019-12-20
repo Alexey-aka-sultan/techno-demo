@@ -1,8 +1,13 @@
 <template>
   <nav>
-    <ul class="pagination">
+    <ul class="pagination justify-content-center">
       <li class="page-item" :class="{ disabled: currentPage === 1 }" v-if="prev">
-        <a class="page-link" @click="selectPage(currentPage - 1)">Previous</a>
+        <a
+          class="page-link d-flex align-items-center pt-0 pb-0 h-100"
+          @click="selectPage(currentPage - 1)"
+        >
+          <i class="fas fa-arrow-alt-circle-left"></i>
+        </a>
       </li>
       <li
         class="page-item"
@@ -10,12 +15,17 @@
         v-for="(item, i) in pageButtonsAmount"
         :key="i"
       >
-        <a class="page-link" @click="selectPage(i + 1 + offsetPageNumber)">{{
-          i + 1 + offsetPageNumber
-        }}</a>
+        <a class="page-link" @click="selectPage(i + 1 + offsetPageNumber)">
+          {{i + 1 + offsetPageNumber}}
+        </a>
       </li>
       <li class="page-item" :class="{ disabled: currentPage === pagesAmount }" v-if="next">
-        <a class="page-link" @click="selectPage(currentPage + 1)">Next</a>
+        <a
+          class="page-link d-flex align-items-center pt-0 pb-0 h-100"
+          @click="selectPage(currentPage + 1)"
+        >
+          <i class="fas fa-arrow-alt-circle-right"></i>
+        </a>
       </li>
     </ul>
   </nav>
@@ -99,8 +109,13 @@ export default {
 <style scoped>
 .pagination li {
   cursor: pointer;
+  text-align: center;
+  min-width: 45px;
 }
 .pagination li a {
   user-select: none;
+}
+.pagination li a i {
+  font-size: 28px;
 }
 </style>
