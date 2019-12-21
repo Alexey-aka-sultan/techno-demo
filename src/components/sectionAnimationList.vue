@@ -8,7 +8,7 @@
       <!--  -->
       <transition-group
         tag="div"
-        class="items-list d-flex align-items-start justify-content-start flex-wrap col-5"
+        class="items-list d-flex align-items-start justify-content-start flex-wrap col-5 pl-0"
         @after-leave="shopAfterLeave"
         move-class="items-list-move"
         leave-active-class="animated rubberBand"
@@ -22,12 +22,12 @@
         </div>
       </transition-group>
       <!--  -->
-      <div class="col-2 d-flex flex-column justify-content-end">
-        <button class="btn-sm btn-success m-1" @click="buyItem">Купить</button>
-        <button class="btn-sm btn-warning m-1" @click="returnItem">Вернуть</button>
+      <div class="col-2 p-0 p-lg-2 d-flex flex-column justify-content-end">
+        <button class="btn-sm btn-success mb-1 p-1" @click="buyItem">Купить</button>
+        <button class="btn-sm btn-warning mt-1 p-1" @click="returnItem">Вернуть</button>
       </div>
       <!--  -->
-      <div class="shopping-list col-5">
+      <div class="shopping-list col-5 pr-0">
         <transition-group
           tag="ul"
           class="list-group"

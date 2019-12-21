@@ -16,7 +16,7 @@
         :key="i"
       >
         <a class="page-link" @click="selectPage(i + 1 + offsetPageNumber)">
-          {{i + 1 + offsetPageNumber}}
+          {{ i + 1 + offsetPageNumber }}
         </a>
       </li>
       <li class="page-item" :class="{ disabled: currentPage === pagesAmount }" v-if="next">
@@ -86,7 +86,7 @@ export default {
   },
   created() {
     try {
-      this.pagesAmount = Math.floor(this.itemsAmount / this.itemsOnPage);
+      this.pagesAmount = Math.ceil(this.itemsAmount / this.itemsOnPage);
       //
       if (this.pagesAmount < this.maxPageButtonsAmount) {
         this.pageButtonsAmount = this.pagesAmount;
@@ -95,13 +95,13 @@ export default {
       }
       //
       this.currentPage = 1;
+      this.$emit("input", this.currentPage);
     } catch (error) {
       console.log(error);
     }
   },
   mounted() {
-    console.log(this.pagesAmount);
-    // console.log(this.pageButtonsAmount);
+    // console.log(this.pagesAmount);
   }
 };
 </script>
