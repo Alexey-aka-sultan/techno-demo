@@ -1,14 +1,14 @@
 <template>
   <section id="animationList-section" class="pt-5 pb-3 bg-white">
     <!--  -->
-    <h4 class="text-center pb-4">
+    <h4 class="text-center section_title">
       Покупка случайного товара по случайным ценам
     </h4>
     <div class="row col-12 m-0">
       <!--  -->
       <transition-group
         tag="div"
-        class="items-list d-flex align-items-start justify-content-start flex-wrap col-5 pl-0"
+        class="items-list d-flex align-items-start justify-content-center flex-wrap border shadow-sm col-5 pl-0 pt-2"
         @after-leave="shopAfterLeave"
         move-class="items-list-move"
         leave-active-class="animated rubberBand"
@@ -27,7 +27,7 @@
         <button class="btn-sm btn-warning mt-1 p-1" @click="returnItem">Вернуть</button>
       </div>
       <!--  -->
-      <div class="shopping-list col-5 pr-0">
+      <div class="shopping-list col-5 border shadow-sm pt-2">
         <transition-group
           tag="ul"
           class="list-group"

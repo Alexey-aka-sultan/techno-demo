@@ -1,8 +1,9 @@
 <template>
   <section
     id="carousel-section"
-    class="d-flex justify-content-center pt-5 pb-5 bg-white"
+    class="pt-5 pb-5 bg-white"
   >
+  <h4 class="text-center section_title">Просто карусель</h4>
     <carouselComponent
       id="carouselOne"
       :images="images"
@@ -11,6 +12,7 @@
       :controls="true"
       :captions="captions"
       :interval="3000"
+      class="m-auto"
     ></carouselComponent>
   </section>
 </template>

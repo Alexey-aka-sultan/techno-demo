@@ -5,13 +5,10 @@
     </header>
     <div id="main" class="container">
         <div class="row">
-          <div id="nav" class="col-3 bg-warning">nav</div>
-          <div id="sections" class="col-9 bg-success">
-            <sectionCarousel></sectionCarousel>
-            <hr>
-            <sectionAnimationList></sectionAnimationList>
-            <hr>
-            <sectionPagination></sectionPagination>
+          <div id="sections" class="col-12">
+            <sectionCarousel class="mt-5 border shadow"></sectionCarousel>
+            <sectionAnimationList class="mt-5 border shadow"></sectionAnimationList>
+            <sectionPagination class="mt-5 border shadow"></sectionPagination>
           </div>
         </div>
     </div>

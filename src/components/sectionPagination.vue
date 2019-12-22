@@ -1,5 +1,6 @@
 <template>
   <section id="pagination-section" class="container pt-5 pb-4 bg-white">
+    <h4 class="text-center section_title">Пагинация</h4>
     <div class="row justify-content-center pb-4 pr-2 pl-2 pr-lg-0 pl-lg-0">
       <!--  -->
       <div class="card col-11 pl-0 pr-0 mb-2" v-for="user in currentUsers" :key="user.id">
