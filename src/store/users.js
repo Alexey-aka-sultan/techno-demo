@@ -1,14 +1,16 @@
 export default {
   state: {
     allUsers: [],
-    moreInfoUserID: -1
+    selectedUser: null
   },
   mutations: {
     setAllUsers(state, payload) {
       state.allUsers = payload;
     },
-    setMoreInfoUserID(state, payload) {
-      state.moreInfoUserID = payload;
+    setSelectedUser(state, id) {
+      state.selectedUser = state.allUsers.find(item => {
+        return item.id === id;
+      });
     }
   },
   actions: {
@@ -19,17 +21,14 @@ export default {
       } catch (error) {
         throw error.response;
       }
-    },
-    getUserByID(context, payload) {
-      return context.getters.allUsers[payload];
     }
   },
   getters: {
     allUsers(state) {
       return state.allUsers;
     },
-    moreInfoUserID(state) {
-      return state.moreInfoUserID;
+    selectedUser(state) {
+      return state.selectedUser;
     }
   }
 };

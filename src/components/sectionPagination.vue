@@ -71,7 +71,7 @@ export default {
       this.currentUsers = this.allUsers.slice(startInd, lastInd);
     },
     setMoreInfoUserID(id) {      
-      this.$store.commit("setMoreInfoUserID", id);
+      this.$store.commit("setSelectedUser", id);
     }
   },
   computed: {
