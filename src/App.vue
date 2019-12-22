@@ -15,6 +15,8 @@
           </div>
         </div>
     </div>
+    <!--  -->
+    <userInfoModal :id="$store.state.userInfoModalID"></userInfoModal>
   </div>
 </template>
 
@@ -23,6 +25,8 @@ import sectionHeader from './components/sectionHeader'
 import sectionCarousel from './components/sectionCarousel'
 import sectionAnimationList from './components/sectionAnimationList'
 import sectionPagination from './components/sectionPagination'
+// 
+import userInfoModal from  './components/userInfoModal'
 
 export default {
   name: "app",
@@ -33,7 +37,8 @@ export default {
     sectionHeader,
     sectionCarousel,
     sectionAnimationList,
-    sectionPagination
+    sectionPagination,
+    userInfoModal
   }
 };
 </script>

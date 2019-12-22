@@ -8,10 +8,13 @@
           <p class="card-text"><strong>Company name: </strong>{{ user.company.name }}</p>
           <p class="card-text">{{ user.company.catchPhrase }}</p>
           <p class="blockquote-footer">{{ user.company.bs }}</p>
-          <div class="collapse" :id="'collapseExample'+user.id">
+          <div class="collapse" :id="'collapseExample' + user.id">
             <div class="card card-body pb-2">
-              <p><strong>Phone: </strong>{{user.phone}}</p>
-              <p><strong>Website: </strong><a :href="'#collapseExample'+user.id" class="text-primary">{{user.website}}</a></p>
+              <p><strong>Phone: </strong>{{ user.phone }}</p>
+              <p>
+                <strong>Website: </strong
+                ><a :href="'#collapseExample' + user.id" class="text-primary">{{ user.website }}</a>
+              </p>
             </div>
           </div>
         </div>
@@ -20,14 +23,22 @@
             class="btn btn-primary btn-card-contacts d-flex align-items-center"
             type="button"
             data-toggle="collapse"
-            v-bind:data-target="'#collapseExample'+user.id"
+            :data-target="'#collapseExample' + user.id"
             aria-expanded="false"
             aria-controls="collapseExample"
           >
             <span>контакты</span>
             <i class="fas fa-angle-right ml-2"></i>
           </button>
-          <button type="button" class="btn btn-link text-primary">подробно...</button>
+          <button
+            @click="setMoreInfoUserID(user.id)"
+            type="button"
+            class="btn btn-link text-primary"
+            data-toggle="modal"
+            :data-target="'#' + $store.state.userInfoModalID"
+          >
+            подробно...
+          </button>
         </div>
       </div>
     </div>
@@ -50,7 +61,6 @@ export default {
     return {
       currentPage: 0,
       itemsOnPage: 3,
-      allUsers: [],
       currentUsers: []
     };
   },
@@ -59,6 +69,14 @@ export default {
       const lastInd = pageNum * this.itemsOnPage;
       const startInd = lastInd - this.itemsOnPage;
       this.currentUsers = this.allUsers.slice(startInd, lastInd);
+    },
+    setMoreInfoUserID(id) {      
+      this.$store.commit("setMoreInfoUserID", id);
+    }
+  },
+  computed: {
+    allUsers() {
+      return this.$store.getters.allUsers;
     }
   },
   mounted() {
@@ -66,9 +84,7 @@ export default {
 
     this.$store
       .dispatch("getUsers")
-      .then(response => {
-        thisObj.allUsers = response;
-      })
+      .then(response => {})
       .catch(error => console.log(error));
   },
   watch: {
@@ -90,8 +106,6 @@ export default {
   transition: all 500ms;
 }
 .btn-card-contacts[aria-expanded="true"] i {
-  transform: rotate(-90deg)
+  transform: rotate(-90deg);
 }
-
-
 </style>

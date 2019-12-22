@@ -158,14 +158,8 @@ export default {
 .items-list,
 .shopping-list {
   height: 400px;
-}
-.shopping-list {
-  overflow-y: scroll;
   overflow-x: hidden;
-}
-
-.items-list {
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 .items-list > .card {

@@ -7,6 +7,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    userInfoModalID: 'userInfoModal',
     itemNames: [
       "volleyball-ball",
       "baseball-ball",
