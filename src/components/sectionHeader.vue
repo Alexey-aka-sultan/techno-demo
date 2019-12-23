@@ -1,7 +1,12 @@
 <template>
   <div class="jumbotron jumbotron-fluid mb-0">
     <div class="container">
-      <transition name="title">
+      <transition
+        name="title"
+        @before-enter="titleBeforeEnter"
+        @after-leave="titleAfterLeave"
+        @before-leave="titleBeforeLeave"
+      >
         <h1 v-if="titleVisibility" class="d-flex">
           <div class="letter-outer" v-for="(letter, i) in title" :key="i">
             <span class="d-block display-1 animated infinite pulse" :style="getStyleForLetter()">
@@ -21,7 +26,8 @@ export default {
   data() {
     return {
       title: [],
-      titleVisibility: true
+      titleVisibility: true,
+      delay1: 1000
     };
   },
   methods: {
@@ -40,19 +46,18 @@ export default {
         color: `rgb(${r},${g},${b})`,
         "text-shadow": `0 0 10px rgb(${sr},${sg},${sb})`
       };
-      // `rgb(${Math.round(Math.random() * 255)},${Math.round(Math.random() * 255)},${Math.round(Math.random() * 255)})`
     },
     async testFunc() {
-      const thisObj = this;
       this.titleVisibility = false;
-
-      await new Promise(resolve => {
-        setTimeout(() => {
-          thisObj.title = "Pachkuchka".split("");
-          resolve();
-        }, 1000);
-      });
-
+    },
+    titleBeforeEnter(el) {
+      el.style.transition = `all ${this.delay1}ms`
+    },
+    titleBeforeLeave(el) {
+      el.style.transition = `all ${this.delay1}ms`
+    },
+    titleAfterLeave(el) {
+      this.title = "Pachkuchka".split("");
       this.titleVisibility = true;
     }
   },
@@ -73,13 +78,7 @@ h1 .letter-outer:hover {
 
 .title-enter {
   opacity: 0;
-}
-.title-enter-active {
-  transition: all 1000ms;
-}
-.title-leave-active {
-  transition: all 1000ms;
-}
+} 
 .title-leave-to {
   opacity: 0;
 }
