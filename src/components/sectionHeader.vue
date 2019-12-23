@@ -8,15 +8,29 @@
         @before-leave="titleBeforeLeave"
       >
         <h1 v-if="titleVisibility" class="d-flex">
-          <div class="letter-outer" v-for="(letter, i) in title" :key="i">
-            <span class="d-block display-1 animated infinite pulse" :style="getStyleForLetter()">
+          <div class="letter-outer display-1" v-for="(letter, i) in title" :key="i">
+            <span class="d-block animated infinite pulse" :style="getStyleForLetter()">
               {{ letter }}
             </span>
           </div>
         </h1>
       </transition>
       <!--  -->
-      <button @click="testFunc">test</button>
+      <form @submit.prevent="updateTitle">
+        <div class="input-group mb-3">
+          <input
+            ref="new-title-input"
+            type="text"
+            class="form-control"
+            placeholder="Введите новый заголовок"
+            required
+            maxlength="15"
+          />
+          <div class="input-group-append">
+            <button class="input-group-text">Поменять</button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </template>
@@ -26,6 +40,7 @@ export default {
   data() {
     return {
       title: [],
+      newTitle: "",
       titleVisibility: true,
       delay1: 1000
     };
@@ -47,17 +62,18 @@ export default {
         "text-shadow": `0 0 10px rgb(${sr},${sg},${sb})`
       };
     },
-    async testFunc() {
+    updateTitle() {
       this.titleVisibility = false;
+      this.newTitle = this.$refs['new-title-input'].value;
     },
     titleBeforeEnter(el) {
-      el.style.transition = `all ${this.delay1}ms`
+      el.style.transition = `all ${this.delay1}ms`;
     },
     titleBeforeLeave(el) {
-      el.style.transition = `all ${this.delay1}ms`
+      el.style.transition = `all ${this.delay1}ms`;
     },
     titleAfterLeave(el) {
-      this.title = "Pachkuchka".split("");
+      this.title = this.newTitle.split("");
       this.titleVisibility = true;
     }
   },
@@ -70,6 +86,7 @@ export default {
 <style>
 h1 .letter-outer {
   cursor: pointer;
+  min-width: 0.2em;
   transition: transform 666ms;
 }
 h1 .letter-outer:hover {
@@ -78,7 +95,7 @@ h1 .letter-outer:hover {
 
 .title-enter {
   opacity: 0;
-} 
+}
 .title-leave-to {
   opacity: 0;
 }
