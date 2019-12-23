@@ -3,11 +3,11 @@
     id="carousel-section"
     class="pt-5 pb-5 bg-white"
   >
-  <h4 class="text-center section_title">Просто карусель</h4>
+  <!-- <h4 class="text-center section_title">Просто карусель</h4> -->
     <carouselComponent
       id="carouselOne"
       :images="images"
-      :width="500"
+      :width="800"
       :indicators="true"
       :controls="true"
       :captions="captions"
@@ -23,9 +23,9 @@ export default {
   data() {
     return {
       images: [
-        "https://place-hold.it/500x300",
-        "https://place-hold.it/500x300",
-        "https://place-hold.it/500x300"
+        "https://place-hold.it/800x500",
+        "https://place-hold.it/800x500",
+        "https://place-hold.it/800x500"
       ],
       captions: [
         { title: "First title", subtitle: "monday" },

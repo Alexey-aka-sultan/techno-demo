@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     userInfoModalID: "userInfoModal",
     navbarScrollSpyID: "navScrollSpy",
+    mainTitle: "Techno demo",
     itemNames: [
       "volleyball-ball",
       "baseball-ball",
