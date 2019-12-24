@@ -45,7 +45,7 @@ export default {
       title: [],
       newTitle: "",
       titleVisibility: true,
-      changeTitleDelay: 1000,
+      changeTitleDelay: 1200,
       bubbles: new Array(5)
     };
   },
@@ -106,6 +106,15 @@ export default {
 </script>
 
 <style>
+.jumbotron {
+  background-image: linear-gradient(0deg, #240361, #0cc5e6), url('../assets/images/header-background.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-blend-mode: screen;
+}
+.jumbotron input, .jumbotron button {
+  z-index: 2;
+}
 h1 .letter-outer {
   cursor: pointer;
   min-width: 0.2em;

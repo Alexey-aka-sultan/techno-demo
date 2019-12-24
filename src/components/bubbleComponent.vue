@@ -55,8 +55,10 @@ export default {
 <style scoped>
 .bubble {
   opacity: 0;
+  z-index: 1;
 }
 .bubble i {
-  color: blueviolet;
+  color: rgb(96, 153, 245);
+  text-shadow: 0 0 3px rgb(96, 153, 245);
 }
 </style>
