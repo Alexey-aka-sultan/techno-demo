@@ -6,13 +6,48 @@
 
 <script>
 export default {
-  mounted() {
-    const thisObj = this;
+  props: {
+    lifeTime: {
+      type: Number,
+      default: 2000
+    },
+    maxDelay: {
+      type: Number,
+      default: 2000
+    }
+  },
+  methods: {
+    async init() {
+      await new Promise(resolve => {
+        setTimeout(() => {resolve()}, Math.round(Math.random() * this.maxDelay));
+      });
 
-    setTimeout(() => {
-      thisObj.$refs["a"].style.bottom = `${250}px`;
-      thisObj.$refs["a"].style.opacity = '1';
-    }, 100);
+      const thisObj = this;
+      const bubbleParentRect = this.$parent.$el.getBoundingClientRect();
+      const bubbleRect = this.$el.getBoundingClientRect();
+      const newLeft = Math.random() * (bubbleParentRect.width - bubbleRect.width);
+
+      thisObj.$refs["a"].style = "";
+      thisObj.$refs["a"].style.top = `${bubbleParentRect.bottom}px`;
+      thisObj.$refs["a"].style.left = `${newLeft}px`;
+      thisObj.$refs["a"].style.opacity = "0";
+
+      await new Promise(resolve => {
+        setTimeout(() => {
+          thisObj.$refs["a"].style.top = `${-bubbleRect.height}px`;
+          thisObj.$refs["a"].style.opacity = "0.5";
+          thisObj.$refs["a"].style.transition = `opacity 1000ms, top linear ${this.lifeTime}ms`;
+          resolve();
+        }, 100);
+      });
+
+      setTimeout(() => {
+        thisObj.init();
+      }, thisObj.lifeTime);
+    }
+  },
+  mounted() {
+    this.init();
   }
 };
 </script>
@@ -20,7 +55,8 @@ export default {
 <style scoped>
 .bubble {
   opacity: 0;
-  bottom: 0;
-  transition: opacity 1000ms, bottom 5000ms;
+}
+.bubble i {
+  color: blueviolet;
 }
 </style>

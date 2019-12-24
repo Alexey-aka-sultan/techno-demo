@@ -1,5 +1,5 @@
 <template>
-  <div class="jumbotron jumbotron-fluid mb-0 position-relative">
+  <div class="jumbotron jumbotron-fluid mb-0 position-relative overflow-hidden">
     <div class="container">
       <transition
         name="title"
@@ -32,7 +32,7 @@
         </div>
       </form>
       <!--  -->
-      <bubbleComponent v-if="bubble"></bubbleComponent>
+      <bubbleComponent v-for="(bubble, i) in bubbles" :key="i" :maxDelay="15000"></bubbleComponent>
     </div>
   </div>
 </template>
@@ -46,7 +46,7 @@ export default {
       newTitle: "",
       titleVisibility: true,
       changeTitleDelay: 1000,
-      bubble: false
+      bubbles: new Array(5)
     };
   },
   methods: {
