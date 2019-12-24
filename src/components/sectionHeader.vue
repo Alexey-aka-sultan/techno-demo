@@ -8,18 +8,18 @@
         @before-leave="titleBeforeLeave"
       >
         <h1 v-if="titleVisibility" class="d-flex">
-          <div class="letter-outer display-1" v-for="(letter, i) in title" :key="i">
-            <span class="d-block animated infinite pulse" :style="getStyleForLetter()">
-              {{ letter }}
+          <div class="letter-outer display-1" v-for="(item, i) in title" :key="i">
+            <span class="d-block animated infinite pulse" :style="item.style">
+              {{ item.letter }}
             </span>
           </div>
         </h1>
       </transition>
       <!--  -->
-      <form @submit.prevent="updateTitle">
+      <form @submit.prevent="hideTitle">
         <div class="input-group mb-3">
           <input
-            ref="new-title-input"
+            v-model="newTitle"
             type="text"
             class="form-control"
             placeholder="Введите новый заголовок"
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import bubbleComponent from './bubbleComponent'
+import bubbleComponent from "./bubbleComponent";
 export default {
   data() {
     return {
@@ -66,9 +66,20 @@ export default {
         "text-shadow": `0 0 10px rgb(${sr},${sg},${sb})`
       };
     },
-    updateTitle() {
+    hideTitle() {
       this.titleVisibility = false;
-      this.newTitle = this.$refs['new-title-input'].value;
+    },
+    updateTitle(val = []) {
+      let arrTitle = [];
+      val.length === 0 ? (arrTitle = this.newTitle.split("")) : (arrTitle = val.split(""));
+      this.title = [];
+
+      for (let i = 0; i < arrTitle.length; i++) {
+        this.title[i] = {
+          letter: arrTitle[i],
+          style: this.getStyleForLetter()
+        };
+      }
     },
     titleBeforeEnter(el) {
       el.style.transition = `all ${this.changeTitleDelay}ms`;
@@ -77,16 +88,16 @@ export default {
       el.style.transition = `all ${this.changeTitleDelay}ms`;
     },
     titleAfterLeave(el) {
-      this.title = this.newTitle.split("");
+      this.updateTitle();
       this.titleVisibility = true;
     }
   },
   created() {
-    this.title = this.$store.state.mainTitle.split("");
+    this.updateTitle(this.$store.state.mainTitle);
   },
   mounted() {
     const thisObj = this;
-    setTimeout(()=> thisObj.bubble = true, 3000)
+    setTimeout(() => (thisObj.bubble = true), 3000);
   },
   components: {
     bubbleComponent
