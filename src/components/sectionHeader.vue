@@ -1,5 +1,5 @@
 <template>
-  <div class="jumbotron jumbotron-fluid mb-0">
+  <div class="jumbotron jumbotron-fluid mb-0 position-relative">
     <div class="container">
       <transition
         name="title"
@@ -31,18 +31,22 @@
           </div>
         </div>
       </form>
+      <!--  -->
+      <bubbleComponent v-if="bubble"></bubbleComponent>
     </div>
   </div>
 </template>
 
 <script>
+import bubbleComponent from './bubbleComponent'
 export default {
   data() {
     return {
       title: [],
       newTitle: "",
       titleVisibility: true,
-      delay1: 1000
+      changeTitleDelay: 1000,
+      bubble: false
     };
   },
   methods: {
@@ -67,10 +71,10 @@ export default {
       this.newTitle = this.$refs['new-title-input'].value;
     },
     titleBeforeEnter(el) {
-      el.style.transition = `all ${this.delay1}ms`;
+      el.style.transition = `all ${this.changeTitleDelay}ms`;
     },
     titleBeforeLeave(el) {
-      el.style.transition = `all ${this.delay1}ms`;
+      el.style.transition = `all ${this.changeTitleDelay}ms`;
     },
     titleAfterLeave(el) {
       this.title = this.newTitle.split("");
@@ -79,6 +83,13 @@ export default {
   },
   created() {
     this.title = this.$store.state.mainTitle.split("");
+  },
+  mounted() {
+    const thisObj = this;
+    setTimeout(()=> thisObj.bubble = true, 3000)
+  },
+  components: {
+    bubbleComponent
   }
 };
 </script>
