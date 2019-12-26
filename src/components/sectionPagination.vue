@@ -4,7 +4,7 @@
     <div class="row justify-content-center pb-4 pr-2 pl-2 pr-lg-0 pl-lg-0">
       <!--  -->
       <transition name="fade" mode="out-in">
-        <splashScreen v-if="!lazyload.show" :height="822" v-lazyload:450="lazyload"></splashScreen>
+        <splashScreen v-if="!lazyload.show" :height="798" v-lazyload:450="lazyload"></splashScreen>
         <!--  -->
         <div v-else class="col-11 pl-0 pr-0">
           <div class="card mb-2" v-for="user in currentUsers" :key="user.id">

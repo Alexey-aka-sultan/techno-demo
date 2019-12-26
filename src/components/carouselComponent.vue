@@ -9,12 +9,7 @@
   >
     <!--  -->
     <div class="carousel-inner">
-      <div
-        v-for="(img, i) in images"
-        :key="i"
-        class="carousel-item"
-        :class="{ active: i === 0 }"
-      >
+      <div v-for="(img, i) in images" :key="i" class="carousel-item" :class="{ active: i === 0 }">
         <img :src="img" class="d-block w-100" />
         <div v-if="captions[i]" class="carousel-caption d-none d-md-block">
           <h5>{{ captions[i].title }}</h5>
@@ -24,21 +19,11 @@
     </div>
     <!-- controls -->
     <div v-if="controls">
-      <a
-        class="carousel-control-prev"
-        :href="`#${id}`"
-        role="button"
-        data-slide="prev"
-      >
+      <a class="carousel-control-prev" :href="`#${id}`" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       </a>
-      <a
-        class="carousel-control-next"
-        :href="`#${id}`"
-        role="button"
-        data-slide="next"
-      >
+      <a class="carousel-control-next" :href="`#${id}`" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
@@ -110,11 +95,17 @@ export default {
   },
   computed: {
     styleObject() {
-      return { width: this.width + "px", 'min-height': this.minHeight + 'px' };
+      return { 'max-width': this.width + "px", "min-height": this.minHeight + "px" };
     }
+  },
+  mounted() {
+    // при переходе со сплеш-скрина, не запускается автоскроллинг
+    // скорее всего всю инициализацию нужно проводить подобным образом, для надежности
+    $(".carousel").carousel({
+      interval: this.interval
+    });
   }
 };
 </script>
 
-<style>
-</style>
+<style></style>

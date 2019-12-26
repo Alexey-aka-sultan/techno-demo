@@ -21,7 +21,8 @@ export default {
 <style scoped>
 .splash-screen {
   width: 100%;
-  background: rgba(118, 118, 119, 0.5);
+  background: rgba(3, 111, 173, 0.4);
+  box-shadow: 0 0 5px rgba(3, 111, 173, 0.4);
 }
 .spinner-border {
     width: 100px;

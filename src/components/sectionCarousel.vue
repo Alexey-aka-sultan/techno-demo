@@ -3,18 +3,19 @@
     <transition name="fade" mode="out-in">
       <splashScreen v-if="!lazyload.show" :height="500" v-lazyload:0="lazyload"></splashScreen>
       <!--  -->
-      <carouselComponent
-        v-else
-        id="carouselOne"
-        :images="images"
-        :width="800"
-        :minHeight="500"
-        :indicators="true"
-        :controls="true"
-        :captions="captions"
-        :interval="3000"
-        class="m-auto"
-      ></carouselComponent>
+      <div v-else>
+        <carouselComponent
+          id="carouselOne"
+          :images="images"
+          :width="800"
+          :minHeight="500"
+          :indicators="true"
+          :controls="true"
+          :captions="captions"
+          :interval="3000"
+          class="m-auto"
+        ></carouselComponent>
+      </div>
     </transition>
   </section>
 </template>
@@ -34,7 +35,7 @@ export default {
         { title: "Second title", subtitle: "sunday" },
         { title: "Third title", subtitle: "friday" }
       ],
-      lazyload: {show: false}
+      lazyload: { show: false }
     };
   },
   components: {
@@ -45,11 +46,12 @@ export default {
 
 <style scoped>
 /*  */
-.fade-enter, .fade-leave-to {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 .fade-enter-active {
-  transition: opacity 500ms;
+  transition: opacity 1500ms;
 }
 .fade-leave-active {
   transition: opacity 1500ms;

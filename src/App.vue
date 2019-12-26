@@ -3,6 +3,7 @@
     <header>
       <sectionHeader></sectionHeader>
     </header>
+    <!--  -->
     <div id="main" class="container">
       <div class="row">
         <div id="sections" class="col-12">
@@ -13,6 +14,9 @@
       </div>
     </div>
     <!--  -->
+    <sectionFooter></sectionFooter>
+
+    <!--  -->
     <userInfoModal :id="$store.state.userInfoModalID"></userInfoModal>
   </div>
 </template>
@@ -22,6 +26,7 @@ import sectionHeader from "./components/sectionHeader";
 import sectionCarousel from "./components/sectionCarousel";
 import sectionAnimationList from "./components/sectionAnimationList";
 import sectionPagination from "./components/sectionPagination";
+import sectionFooter from "./components/sectionFooter";
 //
 import userInfoModal from "./components/userInfoModal";
 
@@ -35,11 +40,10 @@ export default {
     sectionCarousel,
     sectionAnimationList,
     sectionPagination,
+    sectionFooter,
     userInfoModal
   }
 };
 </script>
 
-<style>
-
-</style>
+<style></style>

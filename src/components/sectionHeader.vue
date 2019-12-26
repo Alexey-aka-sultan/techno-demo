@@ -34,6 +34,19 @@
       <!--  -->
       <bubbleComponent v-for="(bubble, i) in bubbles" :key="i" :maxDelay="15000"></bubbleComponent>
     </div>
+    <!-- dropdown -->
+    <div class="dropdown position-absolute">
+      <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+        About author
+        <i class="fas fa-address-card ml-2"></i>
+      </button>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item card-link" href="http://alexey-web.ru" target="_blank">Website</a>
+        <a class="dropdown-item" href="https://vk.com/id237045810" target="_blank">Я в контакте</a>
+        <div class="dropdown-divider"></div>
+        <span class="dropdown-item dropdown-header">Alexey Baizhanov</span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -105,16 +118,19 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .jumbotron {
-  background-image: linear-gradient(0deg, #240361, #0cc5e6), url('../assets/images/header-background.webp');
+  background-image: linear-gradient(0deg, #240361, #0cc5e6),
+    url("../assets/images/header-background.webp");
   background-position: center;
   background-repeat: no-repeat;
   background-blend-mode: screen;
 }
-.jumbotron input, .jumbotron button {
+.jumbotron input,
+.jumbotron button {
   z-index: 2;
 }
+/*  */
 h1 .letter-outer {
   cursor: pointer;
   min-width: 0.2em;
@@ -123,11 +139,38 @@ h1 .letter-outer {
 h1 .letter-outer:hover {
   transform: translateY(-10px);
 }
-
+/*  */
 .title-enter {
   opacity: 0;
 }
 .title-leave-to {
   opacity: 0;
+}
+/*  */
+.dropdown {
+  right: 20px;
+  top: 20px;
+}
+.dropdown button {
+  display: flex;
+  align-items: center;
+  color: white;
+  transition: color linear 200ms;
+}
+.dropdown button::after {
+  display: none;
+}
+.dropdown button:hover {
+  color: violet;
+}
+.dropdown button:hover i {
+  color: yellow;
+}
+.dropdown i {
+  color: white;
+  font-size: 24px;
+}
+.dropdown a:hover {
+  text-decoration: underline;
 }
 </style>
