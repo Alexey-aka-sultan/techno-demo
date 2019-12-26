@@ -1,19 +1,21 @@
 <template>
-  <section
-    id="carousel-section"
-    class="pt-5 pb-5 bg-white"
-  >
-  <!-- <h4 class="text-center section_title">Просто карусель</h4> -->
-    <carouselComponent
-      id="carouselOne"
-      :images="images"
-      :width="800"
-      :indicators="true"
-      :controls="true"
-      :captions="captions"
-      :interval="3000"
-      class="m-auto"
-    ></carouselComponent>
+  <section id="carousel-section" class="pt-5 pb-5 bg-white">
+    <transition name="fade" mode="out-in">
+      <splashScreen v-if="!lazyload.show" :height="500" v-lazyload:0="lazyload"></splashScreen>
+      <!--  -->
+      <carouselComponent
+        v-else
+        id="carouselOne"
+        :images="images"
+        :width="800"
+        :minHeight="500"
+        :indicators="true"
+        :controls="true"
+        :captions="captions"
+        :interval="3000"
+        class="m-auto"
+      ></carouselComponent>
+    </transition>
   </section>
 </template>
 
@@ -31,7 +33,8 @@ export default {
         { title: "First title", subtitle: "monday" },
         { title: "Second title", subtitle: "sunday" },
         { title: "Third title", subtitle: "friday" }
-      ]
+      ],
+      lazyload: {show: false}
     };
   },
   components: {
@@ -40,4 +43,15 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+/*  */
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: opacity 500ms;
+}
+.fade-leave-active {
+  transition: opacity 1500ms;
+}
+</style>

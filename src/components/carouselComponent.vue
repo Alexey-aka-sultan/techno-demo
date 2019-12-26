@@ -69,6 +69,10 @@ export default {
       type: Number,
       default: 300
     },
+    minHeight: {
+      type: Number,
+      default: 300
+    },
     controls: {
       type: Boolean,
       default: false
@@ -106,10 +110,11 @@ export default {
   },
   computed: {
     styleObject() {
-      return { width: this.width + "px" };
+      return { width: this.width + "px", 'min-height': this.minHeight + 'px' };
     }
   }
 };
 </script>
 
-<style></style>
+<style>
+</style>
