@@ -1,4 +1,8 @@
-
+body  {
+  background-image: url('../images/sun-sky-2.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .section_title {
   padding-bottom: 50px;
 }
