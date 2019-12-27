@@ -10,7 +10,7 @@
     <!--  -->
     <div class="carousel-inner">
       <div v-for="(img, i) in images" :key="i" class="carousel-item" :class="{ active: i === 0 }">
-        <img :src="img" class="d-block w-100" />
+        <img :src="img" class="d-block w-100 h-auto" />
         <div v-if="captions[i]" class="carousel-caption d-none d-md-block">
           <h5>{{ captions[i].title }}</h5>
           <p>{{ captions[i].subtitle }}</p>

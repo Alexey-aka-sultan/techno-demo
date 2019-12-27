@@ -1,11 +1,16 @@
 <template>
   <footer>
-    <div class="jumbotron jumbotron-fluid d-flex justify-content-center bg-dark text-white pl-5 pr-5 m-0 mt-5">
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas corporis praesentium dicta
-        aliquid at. Reiciendis nesciunt fugiat maiores nisi, ut, possimus at doloribus amet eaque
-        neque nam earum voluptate expedita.
-      </p>
+    <div
+      class="jumbotron jumbotron-fluid d-flex justify-content-center bg-dark text-white pl-5 pr-5 m-0 mt-5"
+    >
+      <blockquote class="blockquote text-right">
+        <p class="mb-0">
+          Вы смогли, вы дотерпели до конца этой страницы.
+        </p>
+        <footer class="blockquote-footer">
+          Я вас поздравляю! <cite title="Source Title">Ваш Алексей</cite>
+        </footer>
+      </blockquote>
     </div>
   </footer>
 </template>

@@ -7,12 +7,13 @@
         <carouselComponent
           id="carouselOne"
           :images="images"
-          :width="800"
+          :width="900"
           :minHeight="500"
           :indicators="true"
           :controls="true"
           :captions="captions"
-          :interval="3000"
+          :interval="9000"
+          :crossfade="true"
           class="m-auto"
         ></carouselComponent>
       </div>
@@ -22,18 +23,19 @@
 
 <script>
 import carouselComponent from "./carouselComponent";
+import img1 from "../assets/images/carousel-picture-1.jpg";
+import img2 from "../assets/images/carousel-picture-2.jpg";
+import img3 from "../assets/images/carousel-picture-3.jpg";
+let arr = [img1, img2, img3];
+
 export default {
   data() {
     return {
-      images: [
-        "https://place-hold.it/800x500",
-        "https://place-hold.it/800x500",
-        "https://place-hold.it/800x500"
-      ],
+      images: arr,
       captions: [
-        { title: "First title", subtitle: "monday" },
-        { title: "Second title", subtitle: "sunday" },
-        { title: "Third title", subtitle: "friday" }
+        { title: "Автора зовут Алексей", subtitle: "кажется он программист" },
+        { title: "Но ему не стыдно показывать эту работу", subtitle: "" },
+        { title: "", subtitle: "" }
       ],
       lazyload: { show: false }
     };
@@ -51,9 +53,9 @@ export default {
   opacity: 0;
 }
 .fade-enter-active {
-  transition: opacity 1500ms;
+  transition: opacity 500ms;
 }
 .fade-leave-active {
-  transition: opacity 1500ms;
+  transition: opacity 1000ms;
 }
 </style>
